@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="tic tac toe game for random folks!">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="game-container">
+    <p>Current Player: <span id="current-player"></span></p>
+    <div id="gameplay">
+        <button disabled value="0">
+        </button>
+        <button disabled value="1">
+        </button>
+        <button disabled value="2"></button>
+        <button disabled value="3"></button>
+        <button disabled value="4"></button>
+        <button disabled value="5"></button>
+        <button disabled value="6"></button>
+        <button disabled value="7"></button>
+        <button disabled value="8"></button>
+    </div>
+    </div>
+    <div class="pop-up hidden slide-down" id="end-popup">
+        <h3 id="end-description">Game ended!</h3>
+        <button id="restart-btn" class="bounce">Play Again</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
