@@ -23,37 +23,33 @@ html,body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width:30%;
-    height:70%;
+    width:75%;
+    height:65%;
     background:var(--game-bg);
     border:2px solid white;
+    min-width: 280px;
+    max-width: 600px;
+    max-height:700px;
 }
 #game-container>p{
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-align: center;
     color:white;
+    height:auto;
 }
 #current-player{
     font-weight:900;
 }
 #gameplay{
     display: grid;
-    width:90%;
+    width:80%;
     aspect-ratio: 1;
     grid-template-columns: repeat(3,1fr);
     border:2px solid var(--game-bg);
     gap:0.5rem;
-    padding:1rem
+    padding:1rem;
 }
-#gameplay>button{
-    all:unset;
-    aspect-ratio:1;
-    background-color:var(--game-bg);
-    border:2px solid white;
-    text-align:center;
-    font-size:4rem;
-}
-#gameplay>button:disabled{   
+#gameplay>button,#gameplay>button:disabled{
     all:unset;
     aspect-ratio:1;
     background-color:var(--game-bg);
@@ -87,20 +83,15 @@ html,body{
 .pop-up{
     margin:auto;
     width: clamp(280px,25%,400px);
-    min-width: 150px;
     border:2px solid black;
     text-align:center;
     color:white;
     border-radius:10px;
     aspect-ratio: 3;
-    font-size:2rem;
+    font-size:1.5rem;
 }
 .hidden{
     display:none !important;
-}
-#media-teller{
-    width:100px;
-    height:100px;
 }
 .slide-down{
     animation:0.4s ease-in-out slide-down forwards;
@@ -118,9 +109,53 @@ html,body{
         top:50%;
     }
 }
+
+
+@media (max-width:300px){
+    html,body{
+        font-size:12px;
+    }
+    .pop-up{
+        font-size:1.5rem;
+    }
+    #media-teller{
+        background-color: aqua;
+    }
+    #game-container{
+        width:80%;
+        height:60%;
+    }
+    #game-container > p{
+        font-size: 1.8rem;
+    }
+}
+@media (min-width:480px){
+    html,body{
+        font-size:22px;
+    }
+    #game-container{
+        width:72%;
+        height:80%;
+    }
+    #game-container>p{
+        font-size:1.25rem;
+    }
+    #gameplay button, #gameplay button:disabled{
+        font-size: 2.25rem;
+    }
+}
+@media (min-width:700px){
+    html,body{
+        font-size: 25px;
+    }
+    #game-container{
+        height:95%;
+        width:60%;
+    }
+}
 @media (min-width:1000px){
     html,body{
-        font-size:24px;
+        font-size:30px;
     }
     .pop-up{
         font-size:1.5rem;
