@@ -7,6 +7,7 @@
     box-sizing:border-box;
     margin:0;
     padding:0;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 html,body{
     width: 100%;
@@ -24,21 +25,21 @@ html,body{
     justify-content: center;
     align-items: center;
     width:75%;
-    height:65%;
+    height:auto;
     background:var(--game-bg);
     border:2px solid white;
     min-width: 280px;
-    max-width: 600px;
-    max-height:700px;
+    max-height:90%;
 }
 #game-container>p{
     font-size: 1.5rem;
     text-align: center;
     color:white;
     height:auto;
+    font-weight:900;
 }
 #current-player{
-    font-weight:900;
+    font-weight:500;
 }
 #gameplay{
     display: grid;
@@ -59,9 +60,11 @@ html,body{
 }
 .x{
     color: var(--x-color)!important;
+    text-shadow: 2px 2px  5px rgb(200, 0, 100), 0 0 10px rgb(255, 0, 200) !important;
 }
 .o{
     color: var(--o-color) !important;
+    text-shadow: 2px 2px  5px rgb(200, 100, 0), 0 0 10px rgb(255, 200,0) !important;
 }
 #end-popup{
     font-weight:900;
@@ -69,26 +72,47 @@ html,body{
     align-content: center;
     background: linear-gradient(rgb(0, 183, 255),rgb(0, 115, 255));
 }
-#end-popup #restart-btn{
+#end-popup #popup-restart-btn{
     all:unset;
-    background-color: rgb(50,150,200);
+    background-color: var(--game-bg);
     font-size:1rem;
-    border:2px solid rgb(70,100,200);
+    border:2px solid rgb(255, 255, 255);
+    font-weight: 600;
     color:white;
     width:50%;
     height:30%;
-    border-radius: 15px;
+    margin-top:0.5rem;
+    border-radius: 20px;
     text-align:center;
+    text-shadow: 2px 2px 5px#02ccff, 0 0 10px rgb(0, 21, 255);
 }
 .pop-up{
     margin:auto;
     width: clamp(280px,25%,400px);
-    border:2px solid black;
+    border:2px solid rgb(255, 255, 255);
     text-align:center;
     color:white;
     border-radius:10px;
-    aspect-ratio: 3;
+    aspect-ratio: 2;
     font-size:1.5rem;
+}
+.wide-btn{
+    width:50%;
+    margin-bottom: 1rem;
+    border:2px solid white;
+    color:white;
+    padding:0.25rem;
+    background:linear-gradient(rgb(0, 183, 255),rgb(0, 115, 255));
+    text-shadow: 3px 3px 5px#02ccff, 0 0 10px rgb(0, 21, 255);
+    font-size: 1.5rem;
+    border-radius: 30px;
+    background-color: var(--game-bg);
+    font-weight:600;
+}
+#media-teller{
+    position: absolute;
+    opacity: 0.3;
+    top:0;
 }
 .hidden{
     display:none !important;
@@ -97,6 +121,20 @@ html,body{
     animation:0.4s ease-in-out slide-down forwards;
     left:50%;
     transform: translate(-50%,-50%);
+}
+#close-end{
+    position: absolute;
+    top:5px;
+    right:5px;
+    width:2rem;
+    height:2rem;
+    border-radius: 5px;
+    background: linear-gradient(red,rgb(255, 92, 92));
+    color:white;
+    font-weight:bold;
+    font-size:1rem;
+    max-width: 40px;
+    max-height: 40px;
 }
 
 @keyframes slide-down{
@@ -118,12 +156,8 @@ html,body{
     .pop-up{
         font-size:1.5rem;
     }
-    #media-teller{
-        background-color: aqua;
-    }
     #game-container{
         width:80%;
-        height:60%;
     }
     #game-container > p{
         font-size: 1.8rem;
@@ -134,8 +168,8 @@ html,body{
         font-size:22px;
     }
     #game-container{
-        width:72%;
-        height:80%;
+        width:70%;
+        max-width: 400px;
     }
     #game-container>p{
         font-size:1.25rem;
@@ -146,24 +180,34 @@ html,body{
 }
 @media (min-width:700px){
     html,body{
-        font-size: 25px;
+        font-size: 28px;
     }
     #game-container{
-        height:95%;
         width:60%;
+        max-width: 500px;
+    }
+    #media-teller{
+        background-color: #02ccff;
     }
 }
 @media (min-width:1000px){
     html,body{
         font-size:30px;
     }
+    #game-container{
+        max-width: 520px;
+    }
+    #game-container>p{
+        font-size:1.25rem;
+        margin-top:0.5rem;
+    }
+    #gameplay button,#gameplay button:disabled{
+        font-size:3rem;
+    }
     .pop-up{
-        font-size:1.5rem;
+        width:clamp(400px,25%,550px);
     }
     #media-teller{
-        background-color: aqua;
-    }
-    #game-container > p{
-        font-size: 1.5rem;
+        background-color: #02cc00;
     }
 }

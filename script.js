@@ -6,6 +6,8 @@ const restartBtn = document.getElementById('restart-btn');
 const curntPlrSpan = document.getElementById('current-player');
 const endDescriptionText = document.getElementById('end-description');
 const gridBtns = document.querySelectorAll('#gameplay > button');
+const popupRestartBtn = document.getElementById('popup-restart-btn')
+const closeEndBtn = document.getElementById('close-end');
 console.log([...gridBtns][0].getBoundingClientRect().top)
 const points = () => ({
     
@@ -98,8 +100,15 @@ function onGameEnded(description){
     curntPlrSpan.textContent  = 'none'
     endDescriptionText.textContent = description;
 }
-game();
+popupRestartBtn.onclick = ()=>{
+    game();
+    hidePopup(gameEndPopup);
+};
 restartBtn.onclick = ()=>{
     game();
     hidePopup(gameEndPopup);
 };
+closeEndBtn.onclick = ()=>{
+    hidePopup(gameEndPopup);
+}
+game();
