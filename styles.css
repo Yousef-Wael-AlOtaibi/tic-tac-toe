@@ -186,9 +186,6 @@ html,body{
         width:60%;
         max-width: 500px;
     }
-    #media-teller{
-        background-color: #02ccff;
-    }
 }
 @media (min-width:1000px){
     html,body{
@@ -206,8 +203,5 @@ html,body{
     }
     .pop-up{
         width:clamp(400px,25%,550px);
-    }
-    #media-teller{
-        background-color: #02cc00;
     }
 }
