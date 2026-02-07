@@ -11,14 +11,20 @@ function Gameboard() {
         gameboard.push(row);
     }
     const getGameboard = () => gameboard;
+    const markCell = (cell, value) => {
+        console.log(cell);
+        cell.changeValue(value);
+        console.log(cell);
+    }
     return {
         getGameboard,
+        markCell
     }
 }
 
 function Cell() {
     let cellValue = '';
-    const changeValue = value => value = cellValue;
+    const changeValue = value => cellValue = value;
     const getValue = () => cellValue;
     return {
         getValue,
