@@ -61,12 +61,25 @@ const gameController = (function() {
     let currentPlayer = player1;
     const players = [player1, player2];
 
+    function checkForRoundEnd(playerName, marker) {
+        const boardArray = gameboard.getGameboard();
+        const matchCell = cell => cell.getValue() === marker;
+        boardArray.forEach(row => {
+            if(row.every(matchCell)) {
+                console.log(`${playerName} won!`)
+            }
+        })
+    }
+
     function playTurn(choice = []) {
         const [row, column] = choice;
         const cell = gameboard.getGameboard()[row][column];
+        if(cell.getValue()) return;
         gameboard.markCell(cell, currentPlayer.getMarker());
         console.log(`${currentPlayer.getName()} played his turn!`);
         gameboard.printBoard();
+        checkForRoundEnd(currentPlayer.getName(), currentPlayer.getMarker());
+
         currentPlayer = players.find(player => player !== currentPlayer);
     };
 
