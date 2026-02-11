@@ -12,13 +12,26 @@ function Gameboard() {
     }
     const getGameboard = () => gameboard;
     const markCell = (cell, value) => {
-        console.log(cell);
         cell.changeValue(value);
-        console.log(cell);
+    }
+    const printBoard = () => {
+        const boardArray = [];
+        gameboard.forEach(row=>{
+            row.forEach(column => {
+                if(column.getValue()) boardArray.push(column.getValue() + ' ');
+                else {
+                    boardArray.push('. ');
+                }
+            });
+            boardArray.push('br');
+        });
+        const boardString = boardArray.join('').replaceAll('br', '\n');
+        console.log(boardString);
     }
     return {
         getGameboard,
-        markCell
+        markCell,
+        printBoard
     }
 }
 
