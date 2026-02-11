@@ -54,3 +54,20 @@ function Player(name, marker) {
     };
 }
 
+const gameController = (function() {
+    let gameboard = Gameboard();
+    let currentPlayer;
+
+    function playTurn(choice = []) {
+        const [row, column] = choice;
+        const cell = gameboard.getGameboard()[row][column];
+        console.log(row, column);
+        gameboard.markCell(cell, currentPlayer.getMarker());
+        console.log(`${currentPlayer.getName()} played his turn!`);
+        gameboard.printBoard();
+    };
+
+    return {
+        playTurn
+    }
+})();
