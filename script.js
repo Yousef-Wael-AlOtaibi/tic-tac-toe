@@ -56,18 +56,21 @@ function Player(name, marker) {
 
 const gameController = (function() {
     let gameboard = Gameboard();
-    let currentPlayer;
+    const player1 = Player('Player 1', 'x');
+    const player2 = Player('Player 2', 'o');
+    let currentPlayer = player1;
+    const players = [player1, player2];
 
     function playTurn(choice = []) {
         const [row, column] = choice;
         const cell = gameboard.getGameboard()[row][column];
-        console.log(row, column);
         gameboard.markCell(cell, currentPlayer.getMarker());
         console.log(`${currentPlayer.getName()} played his turn!`);
         gameboard.printBoard();
+        currentPlayer = players.find(player => player !== currentPlayer);
     };
 
     return {
-        playTurn
+        playTurn,
     }
 })();
