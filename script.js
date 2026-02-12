@@ -36,13 +36,24 @@ function Gameboard() {
         boardColumns[2].push(row[2]);
     });
     const getBoardColumns = () => boardColumns;
+
+    const boardDiagonals = [[], []];
+    gameboard.forEach(row => {
+        boardDiagonals[0].push(row[gameboard.indexOf(row)]);
+    });
+    gameboard.forEach(row => {
+        const lastRowIndex = 2;
+        boardDiagonals[1].push(row[lastRowIndex-gameboard.indexOf(row)]);
+    });
+    const getBoardDiagonals = () => boardDiagonals;
     return {
         getGameboard,
         markCell,
         printBoard,
-        getBoardColumns
-    }
-}
+        getBoardColumns,
+        getBoardDiagonals
+    };
+};
 
 function Cell() {
     let cellValue = '';
@@ -61,7 +72,7 @@ function Player(name, marker) {
         getName,
         getMarker
     };
-}
+};
 
 const gameController = (function() {
     let gameboard = Gameboard();
@@ -94,6 +105,19 @@ const gameController = (function() {
         return hasWon;
     };
 
+    function checkDiagonalWin(marker) {
+        let hasWon = false;
+        const boardDiagonals = gameboard.getBoardDiagonals();
+        const matchCell = cell => cell.getValue() === marker;
+        boardDiagonals.forEach(diagonal => {
+            if(diagonal.every(matchCell)) {
+                hasWon = true;
+            };
+        });
+        return hasWon;
+    };
+    checkDiagonalWin();
+
     
 
     function checkForRoundEnd(playerName, marker) {
@@ -101,10 +125,15 @@ const gameController = (function() {
         // the returned value should indicate whether it is a win, loss, or tie.
         if(checkHorizontalWin(marker)) {
             console.log(`${playerName} won horizontally!`);
-        }
+            return
+        };
         if(checkVerticalWin(marker)) {
-            console.log(`${playerName} won vertically!`)
-        }
+            console.log(`${playerName} won vertically!`);
+            return
+        };
+        if(checkDiagonalWin(marker)) {
+            console.log(`${playerName} won diagonally!`);
+        };
     };
 
     function playTurn(choice = []) {
