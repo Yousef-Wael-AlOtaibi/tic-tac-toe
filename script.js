@@ -116,23 +116,35 @@ const gameController = (function() {
         });
         return hasWon;
     };
-    checkDiagonalWin();
 
-    
+    function checkForTie() {
+        let isTied = false;
+        let fullRows = 0;
+        const boardArray = gameboard.getGameboard();
+        const checkCellValue = cell => cell.getValue();
+        boardArray.forEach(row => {
+            if(row.every(checkCellValue)) {
+                fullRows++;
+            };
+        });
+        if(fullRows===boardArray.length) {
+            isTied = true;
+        }
+        return isTied;
+    };
 
     function checkForRoundEnd(playerName, marker) {
-        // TODO: Add all possible end conditions and return a value accordingly
-        // the returned value should indicate whether it is a win, loss, or tie.
         if(checkHorizontalWin(marker)) {
             console.log(`${playerName} won horizontally!`);
-            return
-        };
-        if(checkVerticalWin(marker)) {
+        }
+        else if(checkVerticalWin(marker)) {
             console.log(`${playerName} won vertically!`);
-            return
-        };
-        if(checkDiagonalWin(marker)) {
+        }
+        else if(checkDiagonalWin(marker)) {
             console.log(`${playerName} won diagonally!`);
+        }
+        else if(checkForTie()) {
+            console.log('It is a tie!');
         };
     };
 
