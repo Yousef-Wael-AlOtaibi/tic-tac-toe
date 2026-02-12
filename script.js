@@ -61,15 +61,24 @@ const gameController = (function() {
     let currentPlayer = player1;
     const players = [player1, player2];
 
-    function checkForRoundEnd(playerName, marker) {
+    function checkHorizontalWin(marker) {
+        let hasWon = false;
         const boardArray = gameboard.getGameboard();
         const matchCell = cell => cell.getValue() === marker;
         boardArray.forEach(row => {
             if(row.every(matchCell)) {
-                console.log(`${playerName} won!`)
-            }
-        })
+                hasWon = true;
+            };
+        });
+        return hasWon;
     }
+
+    
+
+    function checkForRoundEnd(playerName, marker) {
+        // TODO: Add all possible end conditions and return a value accordingly
+        // the returned value should indicate whether it is a win, loss, or tie.
+    };
 
     function playTurn(choice = []) {
         const [row, column] = choice;
