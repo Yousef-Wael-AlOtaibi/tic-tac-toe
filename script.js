@@ -135,16 +135,37 @@ const gameController = (function() {
 
     function checkForRoundEnd(playerName, marker) {
         if(checkHorizontalWin(marker)) {
-            console.log(`${playerName} won horizontally!`);
+            console.log(`${playerName} won horizontally!`)
+            return {
+                isWinEnding: true,
+                winType: 'horizontally',
+                playerName
+            };
         }
         else if(checkVerticalWin(marker)) {
             console.log(`${playerName} won vertically!`);
+            return {
+                isWinEnding: true,
+                winType: 'vertically',
+                playerName
+            };
         }
         else if(checkDiagonalWin(marker)) {
             console.log(`${playerName} won diagonally!`);
+            return {
+                isWinEnding: true,
+                winType: 'diagonally',
+                playerName
+            };
         }
         else if(checkForTie()) {
             console.log('It is a tie!');
+            return {
+                isWinEnding: false
+            };
+        }
+        else {
+            return
         };
     };
 
