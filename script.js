@@ -28,10 +28,19 @@ function Gameboard() {
         const boardString = boardArray.join('').replaceAll('br', '\n');
         console.log(boardString);
     }
+
+    const boardColumns = [[], [], []];
+    gameboard.forEach(row => {
+        boardColumns[0].push(row[0]);
+        boardColumns[1].push(row[1]);
+        boardColumns[2].push(row[2]);
+    });
+    const getBoardColumns = () => boardColumns;
     return {
         getGameboard,
         markCell,
-        printBoard
+        printBoard,
+        getBoardColumns
     }
 }
 
@@ -71,13 +80,31 @@ const gameController = (function() {
             };
         });
         return hasWon;
-    }
+    };
+
+    function checkVerticalWin(marker) {
+        let hasWon = false;
+        const boardColumns = gameboard.getBoardColumns(); 
+        const matchCell = cell => cell.getValue() === marker;
+        boardColumns.forEach(column => {
+            if(column.every(matchCell)) {
+                hasWon = true;
+            };
+        });
+        return hasWon;
+    };
 
     
 
     function checkForRoundEnd(playerName, marker) {
         // TODO: Add all possible end conditions and return a value accordingly
         // the returned value should indicate whether it is a win, loss, or tie.
+        if(checkHorizontalWin(marker)) {
+            console.log(`${playerName} won horizontally!`);
+        }
+        if(checkVerticalWin(marker)) {
+            console.log(`${playerName} won vertically!`)
+        }
     };
 
     function playTurn(choice = []) {
