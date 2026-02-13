@@ -80,6 +80,20 @@ const gameController = (function() {
     const player2 = Player('Player 2', 'o');
     let currentPlayer = player1;
     const players = [player1, player2];
+    const feedback = {
+        messages: {
+            correctFormat: 'The choiceObject param should be formatted as follows:' +
+            '\n{' +
+            '\n  row: (a whole number in the range [0-2]),' +
+            '\n  column: (a whole number in the range [0-2])' +
+            '\n}',
+            cellAlreadyMarked: 'This cell is already marked.\n' + 
+            'Choose another cell.',
+        },
+        logInvalidChoice: (row = null, column = null) => 
+            'The entered choice object: {row: ' + row + ',  column: ' + column + 
+            '}, is not a valid choice object.'
+    };
 
     function checkHorizontalWin(marker) {
         let hasWon = false;
@@ -167,11 +181,18 @@ const gameController = (function() {
         return false
     };
 
-    function playTurn(choice = []) {
-        const [row, column] = choice;
+    function playTurn(choiceObject = {row: null, column: null}) {
+        const {row, column} = choiceObject;
+        if(row === null|| column === null || row>2 || row<0 || column>2 
+            || column<0) {
+            console.log(feedback.logInvalidChoice(row, column));
+            console.log(feedback.messages.correctFormat);
+            return
+        };
         const cell = gameboard.getGameboard()[row][column];
         if(cell.getValue()) {
-            console.log('This cell is already marked. \nChoose another cell');
+            console.log(feedback.logInvalidChoice(row, column));
+            console.log(feedback.messages.cellAlreadyMarked);
             return;
         };
         gameboard.markCell(cell, currentPlayer.getMarker());
