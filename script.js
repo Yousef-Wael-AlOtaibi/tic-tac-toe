@@ -170,7 +170,10 @@ const gameController = (function() {
     function playTurn(choice = []) {
         const [row, column] = choice;
         const cell = gameboard.getGameboard()[row][column];
-        if(cell.getValue()) return;
+        if(cell.getValue()) {
+            console.log('This cell is already marked. \nChoose another cell');
+            return;
+        };
         gameboard.markCell(cell, currentPlayer.getMarker());
         console.log(`${currentPlayer.getName()} played his turn!`);
         gameboard.printBoard();
