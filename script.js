@@ -82,7 +82,8 @@ const gameController = (function() {
     const players = [player1, player2];
     const feedback = {
         messages: {
-            correctFormat: 'The choiceObject param should be formatted as follows:' +
+            correctFormat: 'The choiceObject param should be formatted as' + 
+            ' follows:' +
             '\n{' +
             '\n  row: (a whole number in the range [0-2]),' +
             '\n  column: (a whole number in the range [0-2])' +
@@ -91,7 +92,7 @@ const gameController = (function() {
             'Choose another cell.',
         },
         logInvalidChoice: (row = null, column = null) => 
-            'The entered choice object: {row: ' + row + ',  column: ' + column + 
+            'The entered choice object: {row: ' + row + ',  column: ' + column +
             '}, is not a valid choice object.'
     };
 
@@ -198,12 +199,27 @@ const gameController = (function() {
         gameboard.markCell(cell, currentPlayer.getMarker());
         console.log(`${currentPlayer.getName()} played his turn!`);
         gameboard.printBoard();
+        const endObject = 
         checkForRoundEnd(currentPlayer.getName(), currentPlayer.getMarker());
 
-        currentPlayer = players.find(player => player !== currentPlayer);
+        if(!endObject) {
+            currentPlayer = players.find(player => player !== currentPlayer);
+            console.log('The game hasn\'t ended.');
+            return;
+        }
+        else {
+            restartGame();
+        };
+    };
+
+    function restartGame() {
+        console.log('Restarting game...');
+        gameboard = Gameboard();
+        currentPlayer = player1;
     };
 
     return {
         playTurn,
-    }
+        restartGame
+    };
 })();
