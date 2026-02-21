@@ -225,8 +225,13 @@ const gameController = (function() {
 })();
 
 const displayController = (function(){ 
-    const gameboardDiv = document.querySelector('#gameboard');
     const boardRows = [...document.querySelectorAll('.row')];
+    const cells = [...document.querySelectorAll('button.cell')];
+    cells.forEach(cell => {
+        cell.addEventListener('click', handleCellClick);
+        cell.textContent = '.';
+    });
+
 
     function getBoardValues(boardArr) {
         const valuesArr = boardArr.map(row => {
@@ -246,6 +251,15 @@ const displayController = (function(){
             cells[1].textContent = valuesArr[boardRows.indexOf(row)][1] || '.';
             cells[2].textContent = valuesArr[boardRows.indexOf(row)][2] || '.';
         });
+    };
+
+    function handleCellClick(event) {
+        const cell = event.target;
+        const choiceObject = {
+            row: cell.getAttribute('data-row'),
+            column: cell.getAttribute('data-column')
+        };
+        gameController.playTurn(choiceObject);  
     };
 
     return {
