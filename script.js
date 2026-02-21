@@ -205,11 +205,11 @@ const gameController = (function() {
         if(!endObject) {
             currentPlayer = players.find(player => player !== currentPlayer);
             console.log('The game hasn\'t ended.');
-            return;
         }
         else {
             restartGame();
         };
+        displayController.renderBoard(gameboard.getGameboard());
     };
 
     function restartGame() {
