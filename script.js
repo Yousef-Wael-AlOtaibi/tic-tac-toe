@@ -223,3 +223,32 @@ const gameController = (function() {
         restartGame
     };
 })();
+
+const displayController = (function(){ 
+    const gameboardDiv = document.querySelector('#gameboard');
+    const boardRows = [...document.querySelectorAll('.row')];
+
+    function getBoardValues(boardArr) {
+        const valuesArr = boardArr.map(row => {
+            const valuesArr = row.map(cell => {
+                return cell.getValue();
+            });
+            return valuesArr;
+        });
+        return valuesArr;
+    };
+
+    function renderBoard(boardArr) {
+        const valuesArr = getBoardValues(boardArr);
+        boardRows.forEach(row => {
+            const cells = row.children;
+            cells[0].textContent = valuesArr[boardRows.indexOf(row)][0] || '.';
+            cells[1].textContent = valuesArr[boardRows.indexOf(row)][1] || '.';
+            cells[2].textContent = valuesArr[boardRows.indexOf(row)][2] || '.';
+        });
+    };
+
+    return {
+        renderBoard
+    };
+})();
