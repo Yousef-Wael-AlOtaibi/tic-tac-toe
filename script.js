@@ -207,7 +207,6 @@ const gameController = (function() {
             console.log('The game hasn\'t ended.');
         }
         else {
-            restartGame();
         };
         displayController.renderBoard(gameboard.getGameboard());
     };
@@ -216,6 +215,8 @@ const gameController = (function() {
         console.log('Restarting game...');
         gameboard = Gameboard();
         currentPlayer = player1;
+        displayController.renderBoard(gameboard.getGameboard());
+        gameboard.printBoard();
     };
 
     return {
@@ -232,7 +233,8 @@ const displayController = (function(){
         cell.textContent = '.';
     });
 
-
+    const restartButton = document.querySelector('#restart-button');
+    restartButton.addEventListener('click', gameController.restartGame);
     function getBoardValues(boardArr) {
         const valuesArr = boardArr.map(row => {
             const valuesArr = row.map(cell => {
