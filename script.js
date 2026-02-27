@@ -86,6 +86,7 @@ const gameController = (function() {
     const player2 = Player('Player 2', 'o');
     let currentPlayer = player1;
     const players = [player1, player2];
+    let isPlaying = true;
     const feedback = {
         messages: {
             correctFormat: 'The choiceObject param should be formatted as' + 
@@ -189,6 +190,9 @@ const gameController = (function() {
     };
 
     function playTurn(choiceObject = {row: null, column: null}) {
+        if(!isPlaying) {
+            return;
+        }
         const {row, column} = choiceObject;
         if(row === null|| column === null || row>2 || row<0 || column>2 
             || column<0) {
@@ -213,12 +217,14 @@ const gameController = (function() {
             console.log('The game hasn\'t ended.');
         }
         else {
+            isPlaying = false;
         };
         displayController.renderBoard(gameboard.getGameboard());
     };
 
     function restartGame() {
         console.log('Restarting game...');
+        isPlaying = true;
         gameboard = Gameboard();
         currentPlayer = player1;
         displayController.renderBoard(gameboard.getGameboard());
