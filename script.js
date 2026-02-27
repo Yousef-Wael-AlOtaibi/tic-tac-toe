@@ -228,7 +228,7 @@ const gameController = (function() {
     function changeConfiguration(playersConfig) {
         player1.changeName(playersConfig.player1Name);
         player1.changeMarker(playersConfig.player1Marker);
-        player2.changeName(playersConfig.player1Name);
+        player2.changeName(playersConfig.player2Name);
         player2.changeMarker(playersConfig.player2Marker);
     };
     return {
