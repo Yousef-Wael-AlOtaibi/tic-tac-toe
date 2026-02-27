@@ -26,7 +26,27 @@
     </div>
     <div class="controls">
         <button id="restart-button">Restart</button>
+        <button id="configure-button">Configure</button>
     </div>
+    <dialog id="configure-dialog">
+        <form action="" id="configure-form">
+            <h2>Configuration</h2>
+            <fieldset>
+                <legend>Players</legend>
+                <div>
+                    <label for="">Player 1's name</label>
+                    <input type="text" id="player1-name-input" value="Player 1">
+                </div>
+                <div>
+                    <label for="">Player 2's name</label>
+                    <input type="text" id="player2-name-input" value="Player 2">
+                </div>
+            </fieldset>
+            <div>
+                <button>Save Changes</button>
+            </div>
+        </form>
+    </dialog>
     <script src="./script.js"></script>
 </body>
 </html>

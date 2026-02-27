@@ -233,6 +233,11 @@ const displayController = (function(){
         cell.textContent = '.';
     });
 
+    const configureButton = document.querySelector('#configure-button');
+    const configureDialog = document.querySelector('#configure-dialog');
+    configureButton.addEventListener('click', () => {
+        configureDialog.showModal();
+    })
     const restartButton = document.querySelector('#restart-button');
     restartButton.addEventListener('click', gameController.restartGame);
     function getBoardValues(boardArr) {
