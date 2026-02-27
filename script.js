@@ -65,12 +65,18 @@ function Cell() {
     };
 }
 
-function Player(name, marker) {
+function Player(playerName, playerMarker) {
+    let name = playerName;
+    let marker = playerMarker;
     const getName = () => name;
     const getMarker = () => marker;
+    const changeName = (newName) => name = newName || name;
+    const changeMarker = (newMarker) => marker = newMarker || marker;
     return {
         getName,
-        getMarker
+        getMarker,
+        changeName,
+        changeMarker
     };
 };
 
@@ -219,9 +225,16 @@ const gameController = (function() {
         gameboard.printBoard();
     };
 
+    function changeConfiguration(playersConfig) {
+        player1.changeName(playersConfig.player1Name);
+        player1.changeMarker(playersConfig.player1Marker);
+        player2.changeName(playersConfig.player1Name);
+        player2.changeMarker(playersConfig.player2Marker);
+    };
     return {
         playTurn,
-        restartGame
+        restartGame,
+        changeConfiguration
     };
 })();
 
