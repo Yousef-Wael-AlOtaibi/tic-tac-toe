@@ -248,6 +248,18 @@ const displayController = (function(){
 
     const configureButton = document.querySelector('#configure-button');
     const configureDialog = document.querySelector('#configure-dialog');
+    const configureForm = document.querySelector('#configure-form');
+    configureForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const player1Name = document.querySelector('#player1-name').value;
+        const player2Name = document.querySelector('#player2-name').value;
+        const player1Marker = document.querySelector('#player1-marker').value;
+        const player2Marker = document.querySelector('#player2-marker').value;
+        gameController.changeConfiguration({player1Name, player2Name, 
+            player1Marker, player2Marker
+        });
+        configureDialog.close();
+    })
     configureButton.addEventListener('click', () => {
         configureDialog.showModal();
     })
