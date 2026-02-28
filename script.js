@@ -155,34 +155,28 @@ const gameController = (function() {
         return isTied;
     };
 
-    function checkForRoundEnd(playerName, marker) {
+    function checkForRoundEnd(marker) {
         if(checkHorizontalWin(marker)) {
-            console.log(`${playerName} won horizontally!`)
             return {
-                isWinEnding: true,
-                winType: 'horizontally',
-                playerName
+                endMessage: 'won horizontally',
+                isWinEnding: true
             };
         };
         if(checkVerticalWin(marker)) {
-            console.log(`${playerName} won vertically!`);
             return {
-                isWinEnding: true,
-                winType: 'vertically',
-                playerName
+                endMessage: 'won vertically',
+                isWinEnding: true
             };
         };
         if(checkDiagonalWin(marker)) {
-            console.log(`${playerName} won diagonally!`);
             return {
-                isWinEnding: true,
-                winType: 'diagonally',
-                playerName
+                endMessage: 'won diagonally',
+                isWinEnding: true
             };
         };
         if(checkForTie()) {
-            console.log('It is a tie!');
             return {
+                endMessage: 'It\'s a tie!',
                 isWinEnding: false
             };
         };
@@ -210,14 +204,24 @@ const gameController = (function() {
         console.log(`${currentPlayer.getName()} played his turn!`);
         gameboard.printBoard();
         const endObject = 
-        checkForRoundEnd(currentPlayer.getName(), currentPlayer.getMarker());
+        checkForRoundEnd(currentPlayer.getMarker());
 
         if(!endObject) {
             currentPlayer = players.find(player => player !== currentPlayer);
             console.log('The game hasn\'t ended.');
+            displayController.updateDisplay(currentPlayer.getName() + '\'s turn.');
         }
         else {
             isPlaying = false;
+            if(endObject.isWinEnding) {
+                const message = `${currentPlayer.getName()} ${endObject.endMessage}`;
+                console.log(message);
+                displayController.updateDisplay(message);
+            }
+            else {
+                console.log(endObject.endMessage);
+                displayController.updateDisplay(endObject.endMessage);
+            }
         };
         displayController.renderBoard(gameboard.getGameboard());
     };
@@ -227,6 +231,7 @@ const gameController = (function() {
         isPlaying = true;
         gameboard = Gameboard();
         currentPlayer = player1;
+        displayController.updateDisplay(currentPlayer.getName() + '\'s turn');
         displayController.renderBoard(gameboard.getGameboard());
         gameboard.printBoard();
     };
@@ -251,6 +256,9 @@ const displayController = (function(){
         cell.addEventListener('click', handleCellClick);
         cell.textContent = '.';
     });
+
+    const display = document.querySelector('#result-display');
+    const updateDisplay = text => display.textContent = text;
 
     const configureButton = document.querySelector('#configure-button');
     const configureDialog = document.querySelector('#configure-dialog');
@@ -301,6 +309,7 @@ const displayController = (function(){
     };
 
     return {
-        renderBoard
+        renderBoard,
+        updateDisplay
     };
 })();
