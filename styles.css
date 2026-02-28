@@ -19,4 +19,5 @@ body {
     font-size: 2rem;
     border-radius: 5px;
     border: 1px solid black;
+    transition: background-color , color, ease-in-out .25s;
 }
