@@ -250,7 +250,6 @@ const gameController = (function() {
 })();
 
 const displayController = (function(){ 
-    const boardRows = [...document.querySelectorAll('.row')];
     const cells = [...document.querySelectorAll('button.cell')];
     cells.forEach(cell => {
         cell.addEventListener('click', handleCellClick);
@@ -280,23 +279,21 @@ const displayController = (function(){
     const restartButton = document.querySelector('#restart-button');
     restartButton.addEventListener('click', gameController.restartGame);
     function getBoardValues(boardArr) {
-        const valuesArr = boardArr.map(row => {
-            const valuesArr = row.map(cell => {
-                return cell.getValue();
-            });
-            return valuesArr;
+        let valuesArr = [];
+        boardArr.forEach(row => {
+            row.forEach(cell => {
+                valuesArr.push(cell.getValue());
+            })
         });
         return valuesArr;
     };
 
     function renderBoard(boardArr) {
         const valuesArr = getBoardValues(boardArr);
-        boardRows.forEach(row => {
-            const cells = row.children;
-            cells[0].textContent = valuesArr[boardRows.indexOf(row)][0] || '.';
-            cells[1].textContent = valuesArr[boardRows.indexOf(row)][1] || '.';
-            cells[2].textContent = valuesArr[boardRows.indexOf(row)][2] || '.';
-        });
+        console.log(valuesArr);
+        cells.forEach(cell => {
+            cell.textContent = valuesArr[cells.indexOf(cell)] || '.';
+        })
     };
 
     function handleCellClick(event) {
