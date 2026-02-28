@@ -12,7 +12,7 @@ body {
     grid-template-rows: repeat(3, 3rem);
     grid-template-columns: repeat(3, 3rem);
     gap: 8px;
-    padding: .5rem;
+    margin: .5rem 0;
 }
 
 .cell {
@@ -20,4 +20,13 @@ body {
     border-radius: 5px;
     border: 1px solid black;
     transition: background-color , color, ease-in-out .25s;
+}
+
+#controls {
+    display: flex;
+    gap: .5rem;
+}
+
+#controls > button {
+    padding: .3rem;
 }
