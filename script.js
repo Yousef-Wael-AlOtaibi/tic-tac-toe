@@ -213,6 +213,7 @@ const gameController = (function() {
         }
         else {
             isPlaying = false;
+            displayController.disableCells();
             if(endObject.isWinEnding) {
                 const message = `${currentPlayer.getName()} ${endObject.endMessage}`;
                 console.log(message);
@@ -234,6 +235,7 @@ const gameController = (function() {
         displayController.updateDisplay(currentPlayer.getName() + '\'s turn');
         displayController.renderBoard(gameboard.getGameboard());
         gameboard.printBoard();
+        displayController.enableCells();
     };
 
     function changeConfiguration(playersConfig) {
@@ -296,6 +298,9 @@ const displayController = (function(){
         })
     };
 
+    const disableCells = () => cells.forEach(cell => cell.disabled = true);
+    const enableCells = () => cells.forEach(cell => cell.disabled = false);
+
     function handleCellClick(event) {
         const cell = event.target;
         const choiceObject = {
@@ -307,6 +312,8 @@ const displayController = (function(){
 
     return {
         renderBoard,
-        updateDisplay
+        updateDisplay,
+        enableCells,
+        disableCells
     };
 })();
