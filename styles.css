@@ -30,3 +30,28 @@ body {
 #controls > button {
     padding: .3rem;
 }
+
+#configure-dialog {
+    background-color: rgb(95, 95, 95);
+    color: white;
+    border-color: black;
+}
+
+#configure-form > h2 {
+    text-align: center;
+    margin-top: 0;
+}
+
+label {
+    padding-right: .5rem;
+}
+
+fieldset {
+    margin: 1rem 0;
+}
+    
+#configure-form > div:last-child > button {
+    display: block;
+    margin: auto;
+    padding: .3rem;
+}
