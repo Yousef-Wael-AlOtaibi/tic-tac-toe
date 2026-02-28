@@ -14,3 +14,9 @@ body {
     gap: 8px;
     padding: .5rem;
 }
+
+.cell {
+    font-size: 2rem;
+    border-radius: 5px;
+    border: 1px solid black;
+}
